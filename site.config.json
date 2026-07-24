@@ -1,0 +1,22 @@
+{
+  "brandName": "Your Name",
+  "pageTitle": "Document Index",
+  "tagline": "Every live link in one place. Click a card to open it.",
+  "repoLabel": "your-github-username/founder-fork-html-publisher",
+
+  "theme": {
+    "bg": "#F6F7F9",
+    "primary": "#16181D",
+    "bodyText": "#525A66",
+    "accent": "#2F6FEB",
+    "accentAlt": "#7B4BD8"
+  },
+
+  "groups": {
+    "client": "Client Documents",
+    "internal": "Internal",
+    "other": "Everything Else"
+  },
+  "groupOrder": ["client", "internal", "other"],
+  "fallbackGroup": "other"
+}
