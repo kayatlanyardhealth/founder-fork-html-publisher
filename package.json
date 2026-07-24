@@ -1,0 +1,13 @@
+{
+  "name": "founder-fork-html-publisher",
+  "version": "1.0.0",
+  "description": "Publish standalone HTML documents to a live URL, with optional per-document password protection.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "index": "node scripts/generate-index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
