@@ -44,6 +44,8 @@ Roughly fifteen minutes, once.
 
 At the top right of this page, click **Fork**, then **Create fork**. You now have your own copy under your account. Everything from here happens in your copy.
 
+Keep it a fork rather than downloading the files — that connection is what lets you pull in improvements later with one click. See *Getting updates* below.
+
 ### 2. Turn on Actions — don't skip this
 
 GitHub switches off automation in forked repositories by default. If you skip this step, your index page will stay empty forever and nothing will tell you why.
@@ -85,7 +87,52 @@ Claude needs to know your repository and your Railway URL. Give it both, and it 
 
 ### 7. Make it yours (optional)
 
-Open `scripts/generate-index.js` and edit the `SITE` block at the very top — your name, the page title, colours, and the group names your documents get sorted into. Everything below that block can be left alone.
+Open **`site.config.json`** and edit it — your name, the page title, colours, and the group names your documents get sorted into.
+
+That one file holds every setting. Nothing else needs touching, and keeping your settings there is what lets you accept future updates without conflicts.
+
+---
+
+## Getting updates
+
+This tool will keep improving. Bugs get found, features get added. Here's how you take them.
+
+### The short version
+
+When there's an update, your fork's page on GitHub shows a line like *"This branch is 3 commits behind."* Next to it is a **Sync fork** button.
+
+1. Go to your fork on GitHub
+2. Click **Sync fork**
+3. Click **Update branch**
+
+Railway redeploys automatically. That's the whole thing — no files to download, nothing to copy, nothing to reinstall. Your documents, your settings, and your passwords are all untouched.
+
+### How you'll know an update exists
+
+You'll be told directly. You can also get notified automatically: go to the **original repository**, click **Watch** at the top right, choose **Custom**, and tick **Releases**. GitHub will email you whenever a new version ships.
+
+### Why this won't break your stuff
+
+The repository is deliberately split into files that are *yours* and files that are *the tool's*:
+
+| Yours — never updated | The tool's — safely updated |
+|---|---|
+| `proposals/` — your documents | `server.js` |
+| `site.config.json` — your settings | `scripts/generate-index.js` |
+| `protected.json` — what's protected | `.github/workflows/` |
+| `index.html` — your index | `README.md` |
+
+Updates only touch the right-hand column. That's why your settings live in `site.config.json` rather than inside the script — so improvements to the script never collide with your branding.
+
+### If Sync fork reports a conflict
+
+Rare, and it only happens if you've hand-edited a file in the right-hand column. GitHub will offer to open a pull request instead of syncing directly.
+
+Don't try to untangle it yourself. Say what happened and it'll be sorted out for you — the fix is usually one line.
+
+### One case worth knowing
+
+If a conflict is reported on `index.html`, it's safe to take whichever version and move on. That file is regenerated from scratch on every push, so any wrong choice corrects itself the next time you publish something.
 
 ---
 
@@ -139,13 +186,15 @@ Say yes when asked, or ask later — protecting a page after it's already publis
 
 Here's what happens underneath:
 
-1. The slug gets added to `protected.json` in your repository. That file records *which* documents are protected. It never contains passwords.
+1. The slug gets added to the `gated` list in `protected.json`. That file records *which* documents are protected. It never contains passwords.
 2. A username and password are generated for that specific document.
 3. The credentials get stored in Railway as an environment variable named after the document. For a document with the slug `client-partnership-0726`, the variable is:
 
    ```
    GATE_CLIENT_PARTNERSHIP_0726  =  client_partnership_0726:GeneratedPassword
    ```
+
+   The name is the slug, uppercased, with dashes turned into underscores.
 
 4. Claude gives you the username and password in the conversation. **That's the only place they appear in readable form** — send them to your recipient separately from the link.
 
@@ -177,7 +226,7 @@ Every published page should carry a comment on its first line:
 
 This controls how the document appears on your index — its display name, which group it's filed under, and its date. Claude adds it automatically. Without it, the index guesses from the slug, and the guess is usually worse.
 
-`group` should match one of the keys in the `SITE.groups` config. Anything unrecognised falls into your catch-all group.
+`group` should match one of the keys in `site.config.json`. Anything unrecognised falls into your catch-all group.
 
 ---
 
@@ -211,6 +260,8 @@ GitHub is free for this. Railway charges by usage, and this is a very small alwa
 
 **Everything returns "temporarily unavailable."** `protected.json` has a syntax error. The server seals all documents rather than risk exposing a protected one. Fix the JSON and it recovers on the next deploy.
 
+**My branding didn't change.** `site.config.json` has a syntax error, so the tool fell back to defaults. Check for a missing comma or quote. The Actions log will say so explicitly.
+
 **A page shows raw HTML code instead of a formatted page.** The file was published with its markup escaped. Republish it.
 
 ---
@@ -219,9 +270,10 @@ GitHub is free for this. Railway charges by usage, and this is a very small alwa
 
 ```
 server.js                        serves documents, enforces protection
+site.config.json                 YOUR settings — name, colours, groups
 protected.json                   which documents are protected (no passwords)
 proposals/                       every published document
 index.html                       auto-generated index, safe to hand-edit
-scripts/generate-index.js        builds the index; SITE config at the top
+scripts/generate-index.js        builds the index
 .github/workflows/               regenerates the index on every push
 ```
