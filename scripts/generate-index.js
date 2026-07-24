@@ -32,16 +32,22 @@ const MANIFEST_PATH = path.join(ROOT, 'protected.json');
 const MONTHS = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const MONTH_ABBR = { jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12 };
 
-// ===========================================================================
-// CONFIGURATION — edit this block. Everything below it can stay as-is.
-// ===========================================================================
-const SITE = {
+// ---------------------------------------------------------------------------
+// Site configuration
+//
+// All of your settings live in site.config.json at the repo root. That file is
+// yours — this file is not. Keeping them separate means upstream updates to
+// this script never collide with your branding, so "Sync fork" stays a
+// one-click operation. Do not move settings back into this file.
+// ---------------------------------------------------------------------------
+
+const CONFIG_PATH = path.join(ROOT, 'site.config.json');
+
+const DEFAULTS = {
   brandName: 'Your Name',
   pageTitle: 'Document Index',
   tagline: 'Every live link in one place. Click a card to open it.',
   repoLabel: 'your-github-username/founder-fork-html-publisher',
-
-  // Colours used by the generated index page.
   theme: {
     bg: '#F6F7F9',
     primary: '#16181D',
@@ -49,11 +55,6 @@ const SITE = {
     accent: '#2F6FEB',
     accentAlt: '#7B4BD8',
   },
-
-  // Documents are sorted into groups. A document lands in a group if its slug
-  // starts with the group key followed by a dash (e.g. "client-proposal-0726"
-  // goes to "client"), or if its meta comment says group=<key>.
-  // Rename these, add your own, delete what you don't need.
   groups: {
     client: 'Client Documents',
     internal: 'Internal',
@@ -62,7 +63,29 @@ const SITE = {
   groupOrder: ['client', 'internal', 'other'],
   fallbackGroup: 'other',
 };
-// ===========================================================================
+
+function loadSiteConfig() {
+  try {
+    if (!fs.existsSync(CONFIG_PATH)) {
+      console.warn('site.config.json not found — falling back to default settings.');
+      return DEFAULTS;
+    }
+    const parsed = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+    return {
+      ...DEFAULTS,
+      ...parsed,
+      theme: { ...DEFAULTS.theme, ...(parsed.theme || {}) },
+      groups: parsed.groups || DEFAULTS.groups,
+      groupOrder: parsed.groupOrder || DEFAULTS.groupOrder,
+      fallbackGroup: parsed.fallbackGroup || DEFAULTS.fallbackGroup,
+    };
+  } catch (err) {
+    console.warn(`site.config.json unreadable (${err.message}) — falling back to default settings.`);
+    return DEFAULTS;
+  }
+}
+
+const SITE = loadSiteConfig();
 
 const GROUP_ORDER = SITE.groupOrder;
 const GROUP_TITLES = SITE.groups;
@@ -426,7 +449,7 @@ ${ventureBlocks}
   </div>
 
   <p class="no-results" id="bottomNote" style="opacity:0.6; font-size:12px; margin-top:24px;">
-    This page is regenerated automatically every time a proposal is pushed to main. If something looks off, check scripts/generate-index.js.
+    This page is regenerated automatically every time a document is pushed to main. If something looks off, check scripts/generate-index.js.
   </p>
 
   <footer>
