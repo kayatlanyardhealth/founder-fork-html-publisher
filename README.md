@@ -10,7 +10,7 @@ Any page can optionally be locked behind a username and password.
 
 - Turns a conversation into a live web page with a permanent URL
 - Keeps every page you've ever published, indefinitely, each at its own address
-- Auto-generates a browsable index of everything you've published
+- Gives you one index page listing everything you've published, updated automatically
 - Lets you password-protect individual documents, one at a time
 - Updating a page keeps the same URL — send the link once, change the contents later
 
@@ -44,7 +44,15 @@ Roughly fifteen minutes, once.
 
 At the top right of this page, click **Fork**, then **Create fork**. You now have your own copy under your account. Everything from here happens in your copy.
 
-### 2. Deploy it to Railway
+### 2. Turn on Actions — don't skip this
+
+GitHub switches off automation in forked repositories by default. If you skip this step, your index page will stay empty forever and nothing will tell you why.
+
+In **your fork**, click the **Actions** tab. You'll see a notice about workflows being disabled. Click the green **"I understand my workflows, go ahead and enable them"** button.
+
+That's it. This is the single easiest step to miss and the one most likely to make you think the tool is broken.
+
+### 3. Deploy it to Railway
 
 In a new browser tab, go to **railway.app** and sign in.
 
@@ -55,27 +63,50 @@ In a new browser tab, go to **railway.app** and sign in.
 
 Wait for the first deploy to finish. It takes a minute or two.
 
-### 3. Give it a web address
+### 4. Give it a web address
 
 Still in Railway, click into the service, then **Settings → Networking → Generate Domain**.
 
-Copy the URL it gives you. That's the home of everything you publish. It'll look something like:
+Copy the URL it gives you. It'll look something like:
 
 ```
 https://founder-fork-html-publisher-production.up.railway.app
 ```
 
-### 4. Check that it works
+**Save this URL somewhere you'll find it.** It's both the home of everything you publish and your index page — see below.
 
-Paste that URL into your browser. You should see an index page — empty, because you haven't published anything yet. If you see it, you're done setting up.
+### 5. Check that it works
 
-### 5. Tell Claude where to publish
+Paste that URL into your browser. You should see an index page — empty, because you haven't published anything yet. If you see it, setup worked.
+
+### 6. Tell Claude where to publish
 
 Claude needs to know your repository and your Railway URL. Give it both, and it will handle publishing from then on.
 
-### 6. Make it yours (optional)
+### 7. Make it yours (optional)
 
 Open `scripts/generate-index.js` and edit the `SITE` block at the very top — your name, the page title, colours, and the group names your documents get sorted into. Everything below that block can be left alone.
+
+---
+
+## Your index page
+
+**Your index is the Railway URL by itself**, with nothing added to the end:
+
+```
+https://your-project-production.up.railway.app
+```
+
+There is nothing to activate and no separate address. It's live from the moment you deploy, and it's empty until you publish something.
+
+Every document you publish adds a card to it automatically — title, slug, date, and a "Protected" badge if it's password-protected. Documents are sorted into the groups you configured, newest first, and there's a search box at the top that filters as you type.
+
+A few things worth knowing about it:
+
+- **It updates on its own.** Publishing a document triggers a GitHub Action that rebuilds the page. Give it a minute or two, then refresh.
+- **It's public.** Anyone with the URL sees the list of everything you've published, including the titles of protected documents. Clicking a protected one still asks for credentials — but the *name* is visible. Bear that in mind when naming sensitive documents.
+- **You can edit it by hand.** Open `index.html` and change any title or grouping. Your edits survive every future rebuild.
+- Bookmark it. It's the only address you need to find anything you've ever published.
 
 ---
 
@@ -172,7 +203,9 @@ GitHub is free for this. Railway charges by usage, and this is a very small alwa
 
 ## Troubleshooting
 
-**The index doesn't show a document I just published.** The index regenerates through a GitHub Action, which takes a minute or two after the push. Refresh.
+**My index page is empty even though I've published documents.** Almost always Actions being switched off on your fork — see setup step 2. Go to the **Actions** tab of your repository and enable workflows. Then publish anything, or make any small edit to `protected.json`, to trigger a rebuild.
+
+**The index doesn't show a document I just published.** The index regenerates through a GitHub Action, which takes a minute or two after the push. Refresh. If it still hasn't appeared, check the Actions tab for a failed run.
 
 **A protected page says "not currently available" instead of asking for a password.** The Railway variable for that document is missing or malformed. Check that its name matches the slug exactly — uppercase, dashes turned into underscores — and that the value contains a colon between username and password.
 
