@@ -81,9 +81,13 @@ https://founder-fork-html-publisher-production.up.railway.app
 
 Paste that URL into your browser. You should see an index page — empty, because you haven't published anything yet. If you see it, setup worked.
 
-### 6. Tell Claude where to publish
+### 6. Give Claude the publishing skill
 
-Claude needs to know your repository and your Railway URL. Give it both, and it will handle publishing from then on.
+In your fork, open the `claude-skill` folder and copy the contents of `SKILL.md`. Paste it into a new file on your own computer, then replace the two placeholder values at the top with your GitHub username and the Railway URL from step 4.
+
+In Claude, go to Settings, then Capabilities, then Skills, and upload that file.
+
+Leave the copy in your repository alone. That's what lets future updates sync cleanly.
 
 ### 7. Make it yours (optional)
 
@@ -121,6 +125,7 @@ The repository is deliberately split into files that are *yours* and files that 
 | `site.config.json` — your settings | `scripts/generate-index.js` |
 | `protected.json` — what's protected | `.github/workflows/` |
 | `index.html` — your index | `README.md` |
+| | `claude-skill/SKILL.md` |
 
 Updates only touch the right-hand column. That's why your settings live in `site.config.json` rather than inside the script — so improvements to the script never collide with your branding.
 
@@ -274,6 +279,7 @@ site.config.json                 YOUR settings — name, colours, groups
 protected.json                   which documents are protected (no passwords)
 proposals/                       every published document
 index.html                       auto-generated index, safe to hand-edit
+claude-skill/SKILL.md            the skill template you install in Claude
 scripts/generate-index.js        builds the index
 .github/workflows/               regenerates the index on every push
 ```
