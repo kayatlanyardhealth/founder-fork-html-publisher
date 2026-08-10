@@ -1,0 +1,365 @@
+<!-- meta: group=client; title=Troupe Medical Center — Proposal; date=2026-08 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lanyard Health — Proposal for Troupe Medical Center</title>
+<style>
+  :root {
+    --green: #0A3D2E;
+    --deep-green: #0B5648;
+    --lime: #CDDD7B;
+    --olive: #95A647;
+    --off-white: #FAFAF7;
+    --cream: #F5F4ED;
+    --soft-gray: #E8E8E2;
+    --mid-gray: #888884;
+    --ink: #1A1A18;
+    --dark-gray: #2A2A28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--off-white);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  .sample-banner {
+    background: var(--dark-gray);
+    color: var(--cream);
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 9px 16px;
+    font-weight: 600;
+  }
+  header.hero {
+    background: var(--green);
+    color: #fff;
+    padding: 56px 24px 48px;
+  }
+  .hero-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .wordmark {
+    font-weight: 600;
+    font-size: 19px;
+    letter-spacing: 0.01em;
+    margin-bottom: 32px;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 14px;
+  }
+  .prepared-for {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 600;
+    margin: 0 0 16px;
+    max-width: 560px;
+  }
+  .hero-sub {
+    max-width: 520px;
+    color: rgba(255,255,255,0.85);
+    font-size: 16px;
+    margin: 0 0 24px;
+  }
+  .hero-contact {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+  }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 8px 24px 40px;
+  }
+  section {
+    padding: 40px 0;
+    border-bottom: 1px solid var(--soft-gray);
+  }
+  section:last-of-type { border-bottom: none; }
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--deep-green);
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 14px;
+  }
+  p { margin: 0 0 14px; color: var(--dark-gray); font-size: 15px; }
+  .scope-box {
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 22px 24px;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .scope-box strong { color: var(--green); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  th, td {
+    text-align: left;
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--soft-gray);
+  }
+  th {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--mid-gray);
+  }
+  td.price { font-weight: 600; color: var(--green); font-size: 16px; }
+  tr.recommended td { background: var(--cream); }
+  .tag {
+    display: inline-block;
+    background: var(--green);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 560px) {
+    .cols { grid-template-columns: 1fr; }
+  }
+  .col-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .col-title.yes { color: var(--green); }
+  .col-title.no { color: var(--mid-gray); }
+  ul { margin: 0; padding-left: 18px; }
+  ul.plain { list-style: none; padding-left: 0; }
+  ul.plain li {
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--dark-gray);
+  }
+  ul.yes li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: 700;
+  }
+  ul.no li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--mid-gray);
+    font-weight: 700;
+  }
+  .monitor-box {
+    background: var(--green);
+    color: #fff;
+    border-radius: 10px;
+    padding: 24px 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .monitor-box .label { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .monitor-box .desc { font-size: 13px; color: rgba(255,255,255,0.75); max-width: 380px; }
+  .monitor-box .price { font-size: 24px; font-weight: 700; text-align: right; }
+  .monitor-box .price span { display: block; font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.7); }
+  .terms {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 560px) {
+    .terms { grid-template-columns: 1fr; }
+  }
+  .terms .t-label { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--ink); }
+  .terms .t-desc { font-size: 13px; color: var(--mid-gray); }
+  footer.close {
+    background: var(--green);
+    color: #fff;
+    padding: 48px 24px;
+  }
+  .close-inner { max-width: 720px; margin: 0 auto; }
+  footer.close h2 { color: #fff; }
+  footer.close p { color: rgba(255,255,255,0.8); max-width: 480px; }
+  .close-contact { font-size: 15px; font-weight: 600; margin-top: 12px; }
+  .fine-print {
+    text-align: center;
+    font-size: 11px;
+    color: var(--mid-gray);
+    padding: 20px 24px;
+  }
+</style>
+</head>
+<body>
+  <div class="sample-banner">Sample proposal — prepared for internal review, not yet sent</div>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="wordmark">Lanyard Health</div>
+      <div class="eyebrow">Credentialing &amp; payer enrollment proposal</div>
+      <div class="prepared-for">Prepared for Troupe Medical Center</div>
+      <h1>A defined path to full payer enrollment for your care team.</h1>
+      <p class="hero-sub">Every application is managed from intake to a documented final answer, so your team always knows where each provider stands.</p>
+      <div class="hero-contact">kay@lanyardhealth.com &nbsp;·&nbsp; lanyardhealth.com</div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="section-label">Scope</div>
+      <h2>What we'd be enrolling</h2>
+      <div class="scope-box">
+        <p style="margin-bottom:0;">Based on what we've discussed, this proposal assumes <strong>4 providers</strong>, each enrolling with roughly <strong>10 payers</strong> — <strong>40 applications</strong> in total. Send over your actual provider and payer list and we'll confirm the exact count before any work begins.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Recommended plan</div>
+      <h2>Growth 10, scaled to your payer list</h2>
+      <p>At 40 applications, your engagement would run as four Growth 10 blocks, or as a single custom quote scoped to your full payer list — whichever comes out lower. Here's how the standard plans compare:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th>Applications</th>
+            <th>Price</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Single</td>
+            <td>1</td>
+            <td class="price">$375</td>
+            <td>A single payer need</td>
+          </tr>
+          <tr>
+            <td>Launch 5</td>
+            <td>5</td>
+            <td class="price">$1,750</td>
+            <td>A new or solo practice starting a panel</td>
+          </tr>
+          <tr class="recommended">
+            <td>Growth 10<span class="tag">Most chosen</span></td>
+            <td>10</td>
+            <td class="price">$3,400</td>
+            <td>A provider building a full panel</td>
+          </tr>
+          <tr>
+            <td>Custom</td>
+            <td>Scoped to your list</td>
+            <td class="price">Quoted</td>
+            <td>Groups like Troupe Medical Center</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:14px; font-size:13px; color:var(--mid-gray);">Additional applications beyond a plan's block are $350 each. Payer, state, and federal filing fees are passed through at cost with no markup.</p>
+    </section>
+
+    <section>
+      <div class="section-label">Included vs. not included</div>
+      <h2>Where the line sits</h2>
+      <div class="cols">
+        <div>
+          <div class="col-title yes">Included in every application</div>
+          <ul class="plain yes">
+            <li>Full lifecycle management — intake, document collection, CAQH review, provider outreach, and submission</li>
+            <li>Payer follow-up every 15 business days, for up to 180 days after submission</li>
+            <li>One correction-and-resubmission cycle for ordinary payer feedback</li>
+            <li>Written status updates and closure documentation for every application</li>
+            <li>A definitive written outcome — approval and effective date, or a clear record of next options</li>
+          </ul>
+        </div>
+        <div>
+          <div class="col-title no">Not included</div>
+          <ul class="plain no">
+            <li>Guarantees of payer approval or processing timelines</li>
+            <li>State professional licensing, DEA registration, or hospital privileging</li>
+            <li>Payer contract rate negotiation or closed-panel appeals</li>
+            <li>Rework from inaccurate practice information, billed at $95/hr after the included cycle</li>
+            <li>Payer, state, and federal filing fees, passed through at cost</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Ongoing</div>
+      <h2>Staying enrolled after go-live</h2>
+      <p>Enrollment isn't a one-time event. Lanyard Monitor keeps Troupe Medical Center's credentials audit-ready year round.</p>
+      <div class="monitor-box">
+        <div>
+          <div class="label">Lanyard Monitor</div>
+          <div class="desc">Quarterly CAQH attestations, license and expirable tracking, revalidation alerts, and payer directory checks.</div>
+        </div>
+        <div class="price">$49<span>per provider, per month</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Payment</div>
+      <h2>Terms</h2>
+      <div class="terms">
+        <div>
+          <div class="t-label">Prepaid by ACH</div>
+          <div class="t-desc">Cards accepted with a 3% processing charge.</div>
+        </div>
+        <div>
+          <div class="t-label">12-month window</div>
+          <div class="t-desc">Plan applications may be used for up to 12 months from purchase.</div>
+        </div>
+        <div>
+          <div class="t-label">Custom engagements</div>
+          <div class="t-desc">Billed on a milestone schedule.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="close">
+    <div class="close-inner">
+      <h2>Ready to move forward?</h2>
+      <p>Send over Troupe Medical Center's provider and payer list. We'll confirm the exact application count, quote the plan that fits, and start a readiness review.</p>
+      <div class="close-contact">kay@lanyardhealth.com &nbsp;·&nbsp; www.lanyardhealth.com</div>
+    </div>
+  </footer>
+  <div class="fine-print">Pricing effective July 2026. Lanyard Health — a service of CredAlt Corporation.</div>
+</body>
+</html>
