@@ -1,0 +1,71 @@
+<!-- meta: group=internal; title=Lanyard Health, August 2026 update; date=2026-08 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lanyard Health, August 2026 update</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#1f2933; --muted:#5f6b76; --line:#e3e8ec; --accent:#1f6f5f; --wash:#f4f7f6; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#ffffff; color:var(--ink); font-family:Inter,'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.6; }
+  main { max-width:680px; margin:0 auto; padding:48px 20px 64px; }
+  .kicker { font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:0 0 8px; }
+  h1 { font-size:30px; font-weight:600; margin:0 0 6px; letter-spacing:-.01em; }
+  .from { color:var(--muted); margin:0 0 32px; font-size:15px; }
+  .tiles { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:0 0 36px; }
+  .tile { border:1px solid var(--line); border-radius:8px; padding:14px 14px 12px; }
+  .tile .fig { font-size:24px; font-weight:600; line-height:1.1; margin:0 0 4px; }
+  .tile .lab { font-size:12.5px; color:var(--muted); margin:0; line-height:1.35; }
+  @media (max-width:560px) { .tiles { grid-template-columns:repeat(2,1fr); } }
+  p { margin:0 0 16px; }
+  h2 { font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:600; margin:32px 0 10px; }
+  .ask { border-left:3px solid var(--accent); background:var(--wash); padding:14px 18px; margin:32px 0 0; }
+  .ask p { margin:0; }
+  footer { margin-top:40px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:14px; }
+  footer p { margin:0 0 6px; }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <p class="kicker">Lanyard Health, monthly update</p>
+  <h1>August 2026</h1>
+  <p class="from">From Kay Ward, Founder</p>
+
+  <div class="tiles">
+    <div class="tile"><p class="fig">45</p><p class="lab">group practices on the platform, two more onboarding</p></div>
+    <div class="tile"><p class="fig">$279K</p><p class="lab">annual recurring revenue</p></div>
+    <div class="tile"><p class="fig">$250K</p><p class="lab">committed on the $1M raise</p></div>
+    <div class="tile"><p class="fig">2</p><p class="lab">practices signed in August</p></div>
+  </div>
+
+  <p>The call that got my attention in August came from EY-Parthenon's healthcare team. They advise a company doing about $150M a year selling into health systems and payers, and that company wants a credentialing partner. Three structures came up on the call, a referral partnership, an investment, or an eventual acquisition. I told them Lanyard is open to a partnership that could grow into something bigger and is not for sale today. They said two weeks for the client's answer. As of August 31 I had not heard it.</p>
+
+  <p>The rest of the month was diligence. Golden Angels in Milwaukee, about 70 angels writing $200K to $300K checks, put me through a full session on August 25. Bread and Butter, Helgen, SixThirty, and Mucker each took the pitch. SixThirty told me their LPs sit on the payer side, so that one is a weak fit and I appreciated the straight answer.</p>
+
+  <h2>What I learned</h2>
+  <p>I lost a customer this summer because I could not answer support questions fast enough while running everything alone. My first hire was a customer success specialist, not an engineer, and I will defend that order to anyone who asks. A practice that signed with you and cannot get a reply will leave before the software ever gets a chance to prove itself.. I already knew this from 15 years on the other side of the table and I still let it happen.</p>
+
+  <h2>The raise</h2>
+  <p>$250K of the $1M is committed on a SAFE, no lead yet. August put five funds and one angel group into the conversation, and Golden Angels is the furthest along. The note I heard on more than one call was to split recurring revenue from one-time enrollment revenue on the traction slide (fair, I had them blended). I am rebuilding that slide now.</p>
+
+  <h2>Product</h2>
+  <p>In August I built payer follow-up into the platform. It now keeps a directory of payer enrollment contacts and sends follow-up letters on open applications on a schedule, in the same format I used for 15 years, so nobody has to remember to chase a stalled application. A new Network view shows you, state by state, which payer networks a provider already appears in, pulled from payer directory data. That view is the first piece of the provider data layer I want Lanyard to become (the enrollment work is how we earn the right to hold that data).</p>
+  <p>Underneath, I spent the month on the groundwork a health system or payer will demand before connecting to us. Every user now signs in with a second factor, provider dates of birth sit encrypted in the database, and I finished writing the SOC 2 policy set. An automated check now blocks any code change that would let one practice see another practice's data. Every enrollment status change runs through a single state machine, so the answer to "where does this application stand" is the same everywhere in the system.</p>
+
+  <h2>Team and Birmingham</h2>
+  <p>The customer success specialist started in August. The credentialing operations role drew 80 applicants in its first two weeks. An executive assistant came on to run the shared client inbox and my calendar. On August 27 I sat down in person with Ambetter of Alabama's provider relations team, and they confirmed delegated credentialing is available to us on request.</p>
+
+  <div class="ask">
+    <p><strong>Where you can help.</strong> Introduce me to a practice or provider group that is hiring clinicians this fall. I want to sit with more practices this quarter and find where the enrollment gaps still are.</p>
+  </div>
+
+  <footer>
+    <p>Reply to this email with questions.</p>
+    <p>Prior updates live on the <a href="https://founder-fork-html-publisher-production-a17c.up.railway.app">index</a>.</p>
+  </footer>
+</main>
+</body>
+</html>
